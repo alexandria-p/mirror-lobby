@@ -1,0 +1,14 @@
+Updated 2020/07/20
+(License unchanged; clarity improved.)
+
+"CONTENT" is all files within this package including but not limited to: source code, images, audio. CONTENT is proprietary and confidential.
+"CREATOR" is FirstGearGames.
+"OWNER" is any individual which has acquired CONTENT through CREATOR or medium of CREATOR.
+
+Copyright (C) FirstGearGames - All Rights Reserved (2020)
+
+CONTENT may not be redistributed. CONTENT or deviations of CONTENT may not be made available to any persons other than OWNER.
+
+Exceptions: CONTENT may be used in closed source applications, personal or commercial, without special permissions.
+
+FirstGearGames <support@firstgeargames.com>

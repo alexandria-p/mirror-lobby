@@ -1,0 +1,70 @@
+2020/10/03
+	- FlexNetworkTransform (experimental)
+		+ Added Teleport Threshold. Transform will teleport if threshold value is not 0, and if distance between current position and target position is greater than value.
+		+ New compression on rotation for better accuracy.
+		+ FlexNetworkTransform and FlexNetworkTransformChild will now immediately synchronize current transform properties for new clients. This change addresses a bug where FlexNetworkTransformChild would not have correct transform properties if the object has moved prior to the player joining, but not after. This also adds support for using FlexNetworkTransform directly on children objects when the networking solution allows child networked objects.
+		+ MirrorNG support added.
+		+ You can now hook into FlexNetworkTransform/Child to validate data received from clients when using Client Authority.
+		+ SequenceId is now a uint, resulting in less bandwidth used for UDP/Unreliable.
+		+ Objects can no longer be moved by clients while server has not yet sent data. This is most commonly seen when a player spawns in and transforms haven't yet changed.
+		+ Begun work on supporting multiple platforms; ideally MirrorNG will be the first to get support.
+
+2020/10/01
+	- FlexNetworkAnimator
+		+ Initial release.
+
+2020/09/27
+	- FlexNetworkTransform
+		+ Fixed FlexNetworkTransformChild not sending transform properties to late joiners until the child object has moved.
+		+ Automatic Interpolation and Interpolation strength have been removed. Use Interpolation Fallbehind instead. This is how far the transform will stay behind it's actual position to compensate for packet loss and throttle.
+		+ Extrapolation is back, and better than ever. Extrapolation Span is how long the transform can extrapolate for when a new packet is expected but does not arrive. This can be combined with a low Interpolation Fallbehind value for near real-time accuracy.
+		+ Fixed properties sometimes not updating to spectators when server was running as client host, while another client was also client authoritative.
+		+ Fixed properties sometimes sending even when they have not changed; no visual disturbance could be seen but this was incuring bandwidth cost.
+		+ Updated inspector to be more helpful.
+
+2020/09/02
+	- FlexNetworkTransform:
+		+ Fixed transforms not moving to a rotation if the change was very small; most commonly seen in 2D games. This was due to Unity incorrectly reporting that rotation values were matching.
+		+ Fixed extrapolation being applied to a transforms position even when a position update did not occur. This could be seen when rotating or scaling while not moving.
+
+2020/08/27
+	- FlexNetworkTransform:
+		+ Fixed data sending excessively when synchronizing rotation while using world space.
+
+2020/08/23
+	- FlexNetworkTransform:
+		+ Fixed position snapping being applied to scale.
+		+ Improvements to performance.
+
+2020/08/19    
+	- FlexNetworkTransform:
+        + Minor improvements to extrapolation.
+
+2020/08/09
+	- FastProximityChecker:
+		+ There is now a `Continuous` option, which is the default behavior. When enabled FastProximityChecker will regularly perform visibility checks. When false visibility checks will only occur on start, and when called manually. This change is useful if you know the object and other objects will always be in range on spawn, such as for a card or board game.
+
+	- FlexNetworkTransform:
+		+ Can now choose between Interval and FixedUpdate for when data is synchronized.
+		+ Supports reliable and unreliable synchronization methods. For best results use Unreliable with a UDP transport.
+		+ Removed ability to disable Enforce Results.
+		+ Added extrapolation to help predict movement when network traffic becomes unsteady.
+		+ Added UseLocalSpace. True by default to synchronize using localSpace values. False to use world space. Can be useful if you have a habbit of making child networked objects.
+		+ PreciseSynchronization is now false by default.
+
+	- ReactivePhysicsObject:
+		+ Can now choose between Interval and FixedUpdate for when data is synchronized.
+		+ Supports reliable and unreliable synchronization methods. For best results use Unreliable with a UDP transport.
+		+ Added PreciseSynchronization. True to synchronize data anytime it has changed. False to allow greater differences before synchronizing. Given that rigidbodies often shift continuously it's recommended to leave this false to not flood the network.
+		+ Added UseLocalSpace. True by default to synchronize using localSpace values. False to use world space. Can be useful if you have a habbit of making child networked objects.
+		+ Objects now snap into place when unable to meet synchronization goal after a duration. This effect often goes unnoticed as the difference is minuscule due to floating point imprecisions.
+		+ Added "AllowTeleport()" method. Calling the method clears the data to synchronize to, until another is received. This can be useful to call before teleporting an object locally, so it doesn't snap back to it's synchronized data. You would also want to move the same on the server.
+		+ Added "ReduceAggressiveness()" method. This method temporarily reduces how aggressive the gameObject will move towards the last received synchronization data. Ideally you will call this method every time your controller moves your object.
+
+2020/07/26
+	- Organized files. It's much more clear now what is demo code, and actual content.
+	- Fixed bug in FastProximityChecker that would sometimes cause objects to not unhide when in range.
+
+2020/07/12
+	- ReactivePhysicsObject now automatically determines if a controller or not. You must only set if object is 2D or 3D.
+	- FlexNetworkTransform and ReactivePhysicsObject can now synchronize using world space values rather than the default local space. Although not recommended, this can be useful if you need to child a networked object.
