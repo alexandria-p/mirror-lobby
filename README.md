@@ -26,9 +26,13 @@ The LobbyNetworkManager.cs is where my custom lobby networking code sits. It ove
 
 Some of the basics of this lobby system were created by using parts of Dapper Dino's lobby project and the Mirror example 'Room' project as references.
 
+```
+# Dapper Dino - Mirror Lobby tutorials
 https://www.youtube.com/watch?v=5LhA4Tk_uvI&list=PLS6sInD7ThM1aUDj8lZrF4b4lpvejB2uB&ab_channel=DapperDino
-https://mirror-networking.com/
 
+# Mirror Networking Library
+https://mirror-networking.com/
+```
 ## Instructions:
 
 Menu scene - the default scene & default Offline scene. 
