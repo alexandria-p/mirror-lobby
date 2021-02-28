@@ -616,8 +616,10 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Build: 1
+    Build: 0
     Collab: 1
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -631,9 +633,9 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: e2626d63-11db-4a08-901c-976b50a76f6c
+  cloudProjectId: cddf4509-74df-48fa-8cc9-c8ba2c6a499e
   framebufferDepthMemorylessMode: 0
-  projectName: Follow Me
+  projectName: MirrorLobby
   organizationId: alexandria-g
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
