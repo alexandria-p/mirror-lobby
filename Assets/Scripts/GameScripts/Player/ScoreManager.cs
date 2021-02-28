@@ -130,7 +130,8 @@ public class ScoreManager: NetworkBehaviour {
             case SyncList<PlayerScoreStruct>.Operation.OP_SET:
                 // index is the index of the item that was updated
                 // item is the previous item
-               //  Debug.Log("playerScores SyncList updated");
+                 if (oldItem.score != newItem.score)
+                    RpcHandleScoreChanged(networkConnection, newItem.score);
                 break;
         }
     }
@@ -296,7 +297,7 @@ public class ScoreManager: NetworkBehaviour {
         } 
         catch {
             // todo handle where no UI yet
-            Debug.Log("failed RpcHandleScoreChanged");
+            Debug.LogWarning("failed RpcHandleScoreChanged");
         }
     }
 
